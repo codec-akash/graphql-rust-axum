@@ -1,6 +1,6 @@
 use async_graphql::{
     http::{graphiql_source, playground_source, GraphQLPlaygroundConfig},
-    EmptyMutation, EmptySubscription, Schema,
+    EmptySubscription, Schema,
 };
 
 use async_graphql_axum::{GraphQLRequest, GraphQLResponse};

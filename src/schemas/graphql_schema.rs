@@ -19,7 +19,7 @@ pub struct MutationRoot {}
 
 #[Object]
 impl MutationRoot {
-    async fn add_event(&self, id: String, name: String) -> Result<Vec<Event>, Error> {
+    async fn add_event(&self, id: String, name: String) -> Result<Event, Error> {
         let event = add_event_todb(id, name).await?;
         Ok(event)
     }

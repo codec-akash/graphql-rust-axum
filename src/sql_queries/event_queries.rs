@@ -26,21 +26,16 @@ pub async fn get_event() -> Result<Vec<Event>, Error> {
     }
 }
 
-pub async fn add_event_todb(id: String, name: String) -> Result<Vec<Event>, Error> {
+pub async fn add_event_todb(id: String, name: String) -> Result<Event, Error> {
     let event = Event { id: id, name: name };
     unsafe {
         if let Some(events) = &GLOBAL_EVENTS {
             let mut locked_events = events.lock().unwrap();
-            locked_events.push(event);
-            Ok(locked_events.clone().to_vec())
+            locked_events.push(event.clone());
+            Ok(event)
         } else {
-            GLOBAL_EVENTS = Some(Mutex::new(vec![event]));
-            if let Some(event) = &GLOBAL_EVENTS {
-                let locked_events = event.lock().unwrap();
-                Ok(locked_events.clone().to_vec())
-            } else {
-                Ok(Vec::new())
-            }
+            GLOBAL_EVENTS = Some(Mutex::new(vec![event.clone()]));
+            Ok(event)
         }
     }
 }
