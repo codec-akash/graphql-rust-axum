@@ -19,8 +19,14 @@ pub struct MutationRoot {}
 
 #[Object]
 impl MutationRoot {
-    async fn add_event(&self, id: String, name: String) -> Result<Event, Error> {
-        let event = add_event_todb(id, name).await?;
+    async fn add_event(
+        &self,
+        name: String,
+        description: String,
+        date: String,
+        price: f64,
+    ) -> Result<Event, Error> {
+        let event = add_event_todb(name, description, date, price).await?;
         Ok(event)
     }
 }

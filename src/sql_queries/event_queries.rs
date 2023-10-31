@@ -26,8 +26,20 @@ pub async fn get_event() -> Result<Vec<Event>, Error> {
     }
 }
 
-pub async fn add_event_todb(id: String, name: String) -> Result<Event, Error> {
-    let event = Event { id: id, name: name };
+pub async fn add_event_todb(
+    // id: String,
+    name: String,
+    description: String,
+    date: String,
+    price: f64,
+) -> Result<Event, Error> {
+    let event = Event {
+        id: "id".to_string(),
+        name,
+        price,
+        description,
+        date,
+    };
     unsafe {
         if let Some(events) = &GLOBAL_EVENTS {
             let mut locked_events = events.lock().unwrap();
