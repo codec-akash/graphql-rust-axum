@@ -6,16 +6,6 @@ use crate::schemas::event_schema::Event;
 static mut GLOBAL_EVENTS: Option<Mutex<Vec<Event>>> = None;
 
 pub async fn get_event() -> Result<Vec<Event>, Error> {
-    // Ok(vec![
-    //     Event {
-    //         id: String::from("1"),
-    //         name: "signup event".to_string(),
-    //     },
-    //     Event {
-    //         id: "2".to_string(),
-    //         name: "Akash".to_string(),
-    //     },
-    // ])
     unsafe {
         if let Some(event) = &GLOBAL_EVENTS {
             let locked_events = event.lock().unwrap();
